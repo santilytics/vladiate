@@ -26,7 +26,6 @@ class Vlad(object):
         self.line_count = 0
         self.ignore_missing_validators = ignore_missing_validators
         self.logger.disabled = quiet
-        self.invalid_lines = set()
 
         self.validators.update(
             {
@@ -124,7 +123,6 @@ class Vlad(object):
                             validator.validate(field, row=row)
                         except ValidationException as e:
                             self.failures[field_name][line].append(e)
-                            self.invalid_lines.add(self.line_count)
                             validator.fail_count += 1
 
         if self.failures:
